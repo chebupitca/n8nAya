@@ -7,9 +7,6 @@
     "pnpm": ">=10.2.1"
   },
   "packageManager": "pnpm@10.2.1",
-  "dependencies": {
-    "html-entities": "^2.3.3"
-  },
   "scripts": {
     "prepare": "node scripts/prepare.mjs",
     "preinstall": "node scripts/block-npm-install.js",
