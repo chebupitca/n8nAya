@@ -97,6 +97,11 @@
       "@types/ws@8.5.4": "patches/@types__ws@8.5.4.patch",
       "@types/uuencode@0.0.3": "patches/@types__uuencode@0.0.3.patch",
       "vue-tsc@2.1.10": "patches/vue-tsc@2.1.10.patch"
-    }
+    },
+    {
+  "dependencies": {
+    "html-entities": "^2.3.3"
+  }
+}
   }
 }
