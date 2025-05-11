@@ -9,8 +9,12 @@ WORKDIR /app
 
 # Копируем файлы проекта, включая патчи
 COPY package*.json ./
+COPY pnpm-lock.yaml ./
 COPY patches/ ./patches/
 COPY . .
+
+# Выполняем подготовку (если требуется)
+RUN pnpm run prepare || true
 
 # Устанавливаем зависимости с помощью pnpm
 RUN pnpm install --production
