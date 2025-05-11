@@ -16,4 +16,6 @@ ENV N8N_HOST=0.0.0.0
 ENV N8N_PROTOCOL=http
 ENV N8N_USER_FOLDER=/data
 EXPOSE 5678
+
+# Вместо прямой установки используем команду запуска n8n
 CMD ["n8n", "start"]
