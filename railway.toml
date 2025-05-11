@@ -1,20 +1,19 @@
 [build]
-builder = "dockerfile"  # Используем кастомный Dockerfile
-dockerfilePath = "Dockerfile"  # Путь к Dockerfile
+builder = "dockerfile"
+dockerfilePath = "Dockerfile"
 
 [deploy]
-startCommand = "n8n start"  # Команда запуска
-healthcheckPath = "/"  # Путь для проверки состояния
-healthcheckTimeout = 100  # Таймаут проверки (в секундах)
-restartPolicyType = "ON_FAILURE"  # Перезапуск при сбое
-restartPolicyMaxRetries = 3  # Максимум 3 попытки перезапуска
+startCommand = "sh -c 'cd packages/cli/bin && ./n8n start'"
+healthcheckPath = "/"
+healthcheckTimeout = 100
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 3
 
 [deploy.envs]
-N8N_PORT = "5678"  # Порт n8n
-N8N_HOST = "0.0.0.0"  # Хост для доступности
-N8N_PROTOCOL = "http"  # Протокол
-N8N_USER_FOLDER = "/data"  # Папка для данных
+N8N_PORT = "5678"
+N8N_HOST = "0.0.0.0"
+N8N_PROTOCOL = "http"
+N8N_USER_FOLDER = "/data"
 
-# Опционально: настройка Volume для сохранения данных
 [deploy.volumes]
-"/data" = { source = "n8n-data", type = "persistent" }  # Подключение Volume для /data
+"/data" = { source = "n8n-data", type = "persistent" }

@@ -1,21 +1,27 @@
-# Стадия сборки
-FROM node:18-slim AS builder
+# Используем версию Node.js, соответствующую требованиям
+FROM node:20.15-slim
+
+# Устанавливаем pnpm
+RUN npm install -g pnpm@10.2.1
+
+# Устанавливаем рабочую директорию
 WORKDIR /app
+
+# Копируем файлы проекта
 COPY package*.json ./
-RUN npm install --production
 COPY . .
 
-# Производственная стадия
-FROM node:18-slim
-WORKDIR /app
-COPY --from=builder /app/package*.json ./
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app ./
+# Устанавливаем зависимости с помощью pnpm
+RUN pnpm install --production
+
+# Устанавливаем переменные окружения для n8n
 ENV N8N_PORT=5678
 ENV N8N_HOST=0.0.0.0
 ENV N8N_PROTOCOL=http
 ENV N8N_USER_FOLDER=/data
+
+# Открываем порт
 EXPOSE 5678
 
-# Вместо прямой установки используем команду запуска n8n
-CMD ["n8n", "start"]
+# Запускаем n8n из правильной директории
+CMD ["sh", "-c", "cd packages/cli/bin && ./n8n start"]
