@@ -7,8 +7,9 @@ RUN npm install -g pnpm@10.2.1
 # Устанавливаем рабочую директорию
 WORKDIR /app
 
-# Копируем файлы проекта
+# Копируем файлы проекта, включая патчи
 COPY package*.json ./
+COPY patches/ ./patches/
 COPY . .
 
 # Устанавливаем зависимости с помощью pnpm
