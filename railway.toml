@@ -1,14 +1,12 @@
 [build]
 builder = "nixpacks"  # Используем Nixpacks для автоматической сборки
 
-# Указываем, что нужно использовать pnpm
-nixpacksPlan = '''
-[phases.setup]
-nixPkgs = ["nodejs-20_x", "pnpm-10_x"]  # Указываем Node.js 20 и pnpm
+[nixpacksPlan]
+  [nixpacksPlan.phases.setup]
+    nixPkgs = ["nodejs-20_x", "pnpm-10_x"]  # Указываем Node.js 20 и pnpm
 
-[phases.build]
-cmds = ["pnpm install --production"]  # Устанавливаем зависимости
-'''
+  [nixpacksPlan.phases.build]
+    cmds = ["pnpm install --production"]  # Устанавливаем зависимости
 
 [deploy]
 startCommand = "sh -c 'cd packages/cli/bin && ./n8n start'"
